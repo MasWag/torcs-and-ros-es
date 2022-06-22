@@ -1,4 +1,4 @@
-FROM dorowu/ubuntu-desktop-lxde-vnc:bionic
+FROM dorowu/ubuntu-desktop-lxde-vnc:focal
 LABEL maintainer="Oliver Wannenwetsch"
 
 # fix apt-dependies from lxde-vnc docker image
@@ -27,6 +27,7 @@ RUN apt-get update \
             libalut-dev \
             libxrender1 \
             zlib1g-dev \
+	    libxxf86vm-dev \
         && rm -rf /var/lib/apt/lists/*
 
 # Add Ros installation
@@ -45,9 +46,9 @@ RUN echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    python-rosdep \
-    python-rosinstall \
-    python-vcstools \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
 
 # setup environment
@@ -59,15 +60,15 @@ RUN rosdep init \
     && rosdep update
 
 # install ros packages and opencv
-ENV ROS_DISTRO melodic
+ENV ROS_DISTRO noetic
 RUN apt-get update && apt-get install -y \
-    ros-melodic-desktop-full=1.4.1-0* \
+    ros-noetic-desktop-full \
     *opencv* \
-    python-catkin-tools \
+    python3-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
 
 # Create ros workspace
-RUN echo "source /opt/ros/melodic/setup.bash" >> /root/.bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
 RUN mkdir -p /root/workspace/src
 
 # make desktop entries

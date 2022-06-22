@@ -6,10 +6,10 @@ a Low-Power Autonomous Driving Testbed with ROS and TORCS and a pun based on _Ru
 
 ## What is included
 
-* Ubuntu 18.04 Docker container (based on [this image](https://github.com/fcwu/docker-ubuntu-vnc-desktop/tree/bionic)) with
+* Ubuntu 20.04 Docker container (based on [this image](https://github.com/fcwu/docker-ubuntu-vnc-desktop/tree/bionic)) with
     * LXDE Desktop Environment
     * VNC-server that allows control from any web browser
-    * ROS Melodic release
+    * ROS Noetic release
     * Extended TORCS racing simulator (patched with picture and control pipeline) ([link](https://github.com/deltaflyer/torcs-1.3.7))
     * TORCS_ROS bridge ([link](https://github.com/fmirus/torcs_ros))
 
@@ -32,6 +32,7 @@ a Low-Power Autonomous Driving Testbed with ROS and TORCS and a pun based on _Ru
 * open a browser and goto the url `http://127.0.0.1:6080/#/`
 * run `torcs` by using the desktop icon
 * Get to run the _quickrace_  in the menu - you won't be able to though, it will lock expecting a car to connect from the ROS adapter
+* Compile the bridge `cd workspace && catkin_make && source ./devel/setup.bash`
 * Start the ROS torc bridge `roslaunch torcs_ros_bringup torcs_ros.launch`
 
 ## Requirements
